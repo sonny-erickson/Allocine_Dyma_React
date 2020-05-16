@@ -6,7 +6,7 @@ export default class MovieList extends Component {
         return (
             <div className="w-75 border d-flex flex-row flex-wrap align-content-start pt-4">
                 {this.props.movies.map((m, index)=>(
-                    <MovieElements movies={m} updateSelectedMovie={this.props.updateSelectedMovie}/>
+                    <MovieElements movies={m} key={m.title} updateSelectedMovie={()=>{this.props.updateSelectedMovie(index)}}/>
                 ))}
               
             </div>
