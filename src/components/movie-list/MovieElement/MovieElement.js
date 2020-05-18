@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import Style from './MovieElement.module.scss'; // le npm install node.scss
 
 export default class MovieElement extends Component {
     onMouseEnter =()=>{
@@ -6,17 +7,16 @@ export default class MovieElement extends Component {
     }
     render() {
         return (
-            <div className="w-50 p-2">
-                <div className="d-flex border" onMouseEnter={this.onMouseEnter}>
+                <div className={"d-flex bg-light " + Style.container }onMouseEnter={this.onMouseEnter}>
                     <img width="150" height="200" alt="movie" src={this.props.movies.img} />
                     <div className="d-flex flex-column flex-fill p-3">
                         <h5  >{this.props.movies.title}</h5>
                         <hr className="w-100"/>
                         <p className="text-justify">{this.props.movies.detail}</p>
-                        <p className="text-justify">{this.props.movies.description}</p>
+                        
                     </div>
                 </div>
-            </div>
+            
         )
     }
 }
