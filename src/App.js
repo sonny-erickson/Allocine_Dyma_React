@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import {Header, MovieList, MovieDetails, Loading} from './components';
 import dataMovies from './data';
-import * as axios from 'axios';
+import apiMovie from './conf/api.movie';
 
 
 class App extends Component{
@@ -26,13 +26,11 @@ class App extends Component{
       selectedMovie : index
     })
   }
-  componentDidMount(){
-    axios.get('https://api.themoviedb.org/4/discover/movie',{
-      headers: {
-        Authorization :'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNmY5MDgyNjhhOTdlODU5OWJlZWEyMDlmMGRjMjkwYyIsInN1YiI6IjVlYzRkZmViOGUyZTAwMDAyMDFjZTZjNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.2fBELJvLqtiMqOYBc8gov11Bv0-DPLcguQAqEHuqSSA'
-      }
-    }).then(response => console.log(response))
-      .catch(err => console.log(err))
+  componentDidMount() {
+    
+    apiMovie.get("/discover/movie")
+      .then(response => console.log(response))
+      .catch(err => console.log(err));
   }
   render(){
     return (
