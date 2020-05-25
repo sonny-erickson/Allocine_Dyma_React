@@ -37,7 +37,7 @@ class App extends Component{
       .catch(err => console.log(err));
   }
 
-  updateMovie(movies){
+  updateMovie= (movies) =>{
     this.setState({
       loading:true,
       movies:movies
@@ -47,7 +47,7 @@ class App extends Component{
     return (
     <div className="App d-flex flex-column">
       <Header />
-        <SearchBar/>
+        <SearchBar updateMovie={this.updateMovie}/>
         {this.state.loading ? (
           <div className='d-flex flex-row border flex-lg-fill pt-4 p-2'>
             <MovieList movies={this.state.movies} updateSelectedMovie={this.updateSelectedMovie}/>
