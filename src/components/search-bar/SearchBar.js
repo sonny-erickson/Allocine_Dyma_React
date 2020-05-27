@@ -5,7 +5,6 @@ import  apiMovie from '../../conf/api.movie'
 export default class SearchBar extends Component {
 
   submit = (values, actions) => {
-    
     const query = '?' + Object.keys(values)
                           .map( key => key + '=' + values[key] + '&')
                           .join('');
