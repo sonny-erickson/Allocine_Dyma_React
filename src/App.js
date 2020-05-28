@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
-import {Header, MovieList, MovieDetails, Loading, SearchBar} from './components';
+import {Header} from './components';
 import apiMovie from './conf/api.movie';
+import Films from './features/films';
 
 
 class App extends Component{
@@ -47,15 +48,15 @@ class App extends Component{
     return (
     <div className="App d-flex flex-column">
       <Header />
-        <SearchBar updateMovie={this.updateMovie}/>
-        {this.state.loading ? (
-          <div className='d-flex flex-row border flex-lg-fill pt-4 p-2'>
-            <MovieList movies={this.state.movies} updateSelectedMovie={this.updateSelectedMovie}/>
-            <MovieDetails movie={this.state.movies[this.state.selectedMovie]}/>
-          </div>
-        ):(
-          <Loading/>
-        )}
+      <Films
+      updateMovie={this.state.updateMovie}
+      loading={this.state.loading}
+      movies={this.state.movies}
+      updateSelectedMovie={this.state.updateSelectedMovie}
+      selectedMovie={this.state.selectedMovie}
+      
+      
+      />
       
     </div>
   );
