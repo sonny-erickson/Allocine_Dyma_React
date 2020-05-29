@@ -3,6 +3,8 @@ import './App.css';
 import {Header} from './components';
 import apiMovie from './conf/api.movie';
 import Films from './features/films';
+import Favoris from './features/favoris';
+import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 
 
 class App extends Component{
@@ -46,19 +48,29 @@ class App extends Component{
   } 
   render(){
     return (
-    <div className="App d-flex flex-column">
-      <Header />
-      <Films
-      updateMovie={this.state.updateMovie}
-      loading={this.state.loading}
-      movies={this.state.movies}
-      updateSelectedMovie={this.state.updateSelectedMovie}
-      selectedMovie={this.state.selectedMovie}
-      
-      
-      />
-      
-    </div>
+      <Router>
+        <div className="App d-flex flex-column">
+          <Header />
+          <Switch>
+            <Route path="/films" render={(props)=>
+              <Films
+                {... props}
+                updateMovie={this.updateMovie}
+                loading={this.state.loading}
+                movies={this.state.movies}
+                updateSelectedMovie={this.updateSelectedMovie}
+                selectedMovie={this.state.selectedMovie}
+              />
+            }/>
+            <Route path="/favoris" component={ Favoris} />
+            <Redirect to="/films" />
+
+          </Switch>
+         
+        </div>
+
+      </Router>
+    
   );
   }
   
