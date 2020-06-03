@@ -13,7 +13,8 @@ class App extends Component{
     this.state={
       movies: null,
       selectedMovie:0,
-      loading:false
+      loading:false,
+      favoris:[]
     }
     
   }
@@ -46,6 +47,35 @@ class App extends Component{
       movies:movies
     })
   } 
+  // addFavori = (title) => {
+  //   const favoris = this.state.favoris.slice();//renvoie un objet tableau, contenant une copie superficielle (shallow copy) d'une portion du tableau d'origine
+  //   const film = this.state.movies.find( m => m.title === title );
+  //   favoris.push(film);
+  //   this.setState({
+  //     favoris
+  //   });
+  // }
+  //   removeFavori = (title) => {
+  //   const favoris = this.state.favoris.slice();
+  //   const index = this.state.favoris.findIndex( f => f.title === title );
+  //   favoris.splice(index, 1);
+  //   this.setState({
+  //     favoris
+  //   });
+  // }
+  addFavori = title => {
+    const film = {...this.state.movies.find( m => m.title === title )};
+    this.setState(state => ({
+      favoris: [...this.state.favoris, film]
+    }));
+    }
+    
+    removeFavori = title => {
+    const index = this.state.favoris.findIndex( f => f.title === title );
+    this.setState(state => ({
+      favoris: state.favoris.filter((_, i) => i !== index)
+    }));
+    }
   render(){
     return (
       <Router>
@@ -60,9 +90,20 @@ class App extends Component{
                 movies={this.state.movies}
                 updateSelectedMovie={this.updateSelectedMovie}
                 selectedMovie={this.state.selectedMovie}
+                addFavori={ this.addFavori }
+                removeFavori={ this.removeFavori }
+                favoris={ this.state.favoris.map( f => f.title ) }
               />
             }/>
-            <Route path="/favoris" component={ Favoris} />
+            <Route path="/favoris" render={(props) => {
+              return (
+                <Favoris
+                  {...props}
+                  favoris={this.state.favoris}
+                  removeFavori={this.removeFavori}
+                />
+              )
+            }} />
             <Redirect to="/films" />
 
           </Switch>

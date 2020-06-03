@@ -6,7 +6,14 @@ export default class MovieList extends Component {
         return (
             <div className="w-75 border d-flex flex-row flex-wrap justify-content-center pt-4">
                 {this.props.movies.map((m, index)=>(
-                    <MovieElements movies={m} key={m.title + index} updateSelectedMovie={()=>{this.props.updateSelectedMovie(index)}}/>
+                    <MovieElements 
+                    movies={m} 
+                    key={m.title + index} 
+                    updateSelectedMovie={()=>{this.props.updateSelectedMovie(index)}}
+                    isFavori={ this.props.favoris.includes(m.title) }
+                    addFavori={ this.props.addFavori }
+                    removeFavori={ this.props.removeFavori } 
+                    />
                 ))}
               
             </div>
